@@ -1,0 +1,36 @@
+{
+    "dataset_reader": {
+        "type": "sst_tokens"
+    },
+    "iterator": {
+        "type": "bucket",
+        "batch_size": 32,
+        "sorting_keys": [
+            [
+                "tokens",
+                "num_tokens"
+            ]
+        ]
+    },
+    "model": {
+        "type": "lstm_classifier",
+        "encoder": {
+            "type": "lstm",
+            "hidden_size": 128,
+            "input_size": 128
+        },
+        "word_embeddings": {
+            "tokens": {
+                "type": "embedding",
+                "embedding_dim": 128
+            }
+        }
+    },
+    "train_data_path": "data/stanfordSentimentTreebank/trees/train.txt",
+    "validation_data_path": "data/stanfordSentimentTreebank/trees/dev.txt",
+    "trainer": {
+        "num_epochs": 1,
+        "optimizer": "adam",
+        "patience": 10
+    }
+}
